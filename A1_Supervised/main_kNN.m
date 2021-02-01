@@ -7,7 +7,7 @@
 % 3 = dot cloud 3
 % 4 = OCR data
 
-dataSetNr = 1; % Change this to load new data 
+dataSetNr = 2; % Change this to load new data 
 
 % X - Data samples
 % D - Desired output from classifier for each sample
@@ -15,7 +15,7 @@ dataSetNr = 1; % Change this to load new data
 [X, D, L] = loadDataSet( dataSetNr );
 
 % You can plot and study dataset 1 to 3 by running:
-% plotCase(X,D)
+plotCase(X,D)
 
 %% Select a subset of the training samples
 
@@ -32,10 +32,10 @@ selectAtRandom = true;          % true = select samples at random, false = selec
 % XBinComb = combineBins(XBins, [1,2,3]);
 
 % Add your own code to setup data for training and test here
-% XTrain = ...
-% LTrain = ...
-% XTest  = ...
-% LTest  = ...
+XTrain = cell2mat(XBins(1));
+LTrain = cell2mat(LBins(1));
+XTest  = cell2mat(XBins(2));
+LTest  = cell2mat(LBins(2));
 
 %% Use kNN to classify data
 %  Note: you have to modify the kNN() function yourself.
@@ -53,10 +53,10 @@ LPredTest  = kNN(XTest , k, XTrain, LTrain);
 %  functions yourself.
 
 % The confucionMatrix
-cM = calcConfusionMatrix(LPredTest, LTest)
+cM = calcConfusionMatrix(LPredTest, LTest);
 
 % The accuracy
-acc = calcAccuracy(cM)
+acc = calcAccuracy(cM);
 
 %% Plot classifications
 %  Note: You should not have to modify this code
@@ -64,5 +64,5 @@ acc = calcAccuracy(cM)
 if dataSetNr < 4
     plotResultDots(XTrain, LTrain, LPredTrain, XTest, LTest, LPredTest, 'kNN', [], k);
 else
-    plotResultsOCR(XTest, LTest, LPredTest)
+    plotResultsOCR(XTest, LTest, LPredTest);
 end

@@ -24,9 +24,26 @@ end
 
 % Build
 
+end
+
+
+
+LTrue = [1 1 1 2 2 2 1 1 1 3 3 3 1 2];
+LPred = [1 2 1 1 2 3 1 2 3 2 3 3 2 1];
+classes  = unique(LTrue);
+NClasses = length(classes);
+oneHotLTrue = zeros(length(LTrue),NClasses);
+oneHotLPred = zeros(length(LPred),NClasses);
+unique(y_t);
 for i = 1:NClasses
-    for j = 1:NClasses
-        cM(i,j) = sum(oneHotLTrue(:,i)+oneHotLPred(:,j)==2);
+    for j = 1:length(LTrue)
+        if LTrue(j)==classes(i)
+            oneHotLTrue(j,i)=1;
+        end
+        if LPred(j)==classes(i)
+            oneHotLPred(j,i)=1;
+        end
     end
 end
-end
+        
+        
