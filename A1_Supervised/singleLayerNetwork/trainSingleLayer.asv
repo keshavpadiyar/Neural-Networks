@@ -26,7 +26,8 @@ ErrTest(1)  = sum(sum((YTest  - DTest ).^2)) / NTest;
 
 for n = 1:numIterations
     % Add your own code here
-    grad_w = 2/NTrain * XTrain' * (YTrain - DTrain);
+    for i = 1:size(XTrain,1)
+    grad_w = 2 * XTrain' * (YTrain - DTrain);
     
     % Take a learning step
     Wout = Wout - learningRate * grad_w;
@@ -36,6 +37,7 @@ for n = 1:numIterations
     YTest  = runSingleLayer(XTest , Wout);
     ErrTrain(n+1) = sum(sum((YTrain - DTrain).^2)) / NTrain;
     ErrTest(n+1)  = sum(sum((YTest  - DTest ).^2)) / NTest;
+    end
 end
 end
 
