@@ -7,43 +7,7 @@ NClasses = length(classes);
 % Add your own code here
 cM = zeros(NClasses);
 
-% One Hot Encoding for classes
-oneHotLTrue = zeros(length(LTrue),NClasses);
-oneHotLPred = zeros(length(LPred),NClasses);
-
-for i = 1:NClasses
-    for j = 1:length(LTrue)
-        if LTrue(j)==classes(i)
-            oneHotLTrue(j,i)=1;
-        end
-        if LPred(j)==classes(i)
-            oneHotLPred(j,i)=1;
-        end
-    end
+for i = 1 : size(LPred,1)
+    cM( LPred(i), LTrue(i) ) = cM( LPred(i), LTrue(i) ) + 1;
 end
-
-% Build
-
 end
-
-
-
-LTrue = [1 1 1 2 2 2 1 1 1 3 3 3 1 2];
-LPred = [1 2 1 1 2 3 1 2 3 2 3 3 2 1];
-classes  = unique(LTrue);
-NClasses = length(classes);
-oneHotLTrue = zeros(length(LTrue),NClasses);
-oneHotLPred = zeros(length(LPred),NClasses);
-unique(y_t);
-for i = 1:NClasses
-    for j = 1:length(LTrue)
-        if LTrue(j)==classes(i)
-            oneHotLTrue(j,i)=1;
-        end
-        if LPred(j)==classes(i)
-            oneHotLPred(j,i)=1;
-        end
-    end
-end
-        
-        

@@ -29,30 +29,28 @@ selectAtRandom = true;          % true = select samples at random, false = selec
 % XBinComb = combineBins(XBins, [1,2,3]);
 
 % Add your own code to setup data for training and test here
-XTrain = cell2mat(XBins(1));
-DTrain = cell2mat(DBins(1));
-LTrain = cell2mat(LBins(1));
-XTest  = cell2mat(XBins(2));
-DTest  = cell2mat(DBins(2));
-LTest  = cell2mat(LBins(2));
+XTrain = XBins{1};
+DTrain = DBins{1};
+LTrain = LBins{1};
+XTest  = XBins{2};
+DTest  = DBins{2};
+LTest  = LBins{2};
 
 %% Modify the X Matrices so that a bias is added
 %  Note that the bias must be the last feature for the plot code to work
 
 % The training data
-% XTrain = ...
+XTrain = [XTrain,ones(size(XTrain,1),1)];
 
 % The test data
-% XTest = ...
-
+XTest = [XTest,ones(size(XTest,1),1)];
 %% Train your single layer network
 %  Note: You need to modify trainSingleLayer() and runSingleLayer()
 %  in order to train the network
 
 numIterations = 10000;  % Change this, number of iterations (epochs)
 learningRate  = 0.0001; % Change this, your learning rate
-nClass = length(unique(L)); % Get Number of Classes for weights
-W0 = reshape(rand(1,size(X,2)*nClass),size(X,2),nClass);%repmat(repelem(0.5,size(X,2)),nClass,1); % Change this, initialize your weight matrix W
+W0 = rand(size(XTrain,2),size(DTrain,2));% Change this, initialize your weight matrix W
 
 % Run training loop
 tic;
