@@ -7,7 +7,7 @@
 % 3 = dot cloud 3
 % 4 = OCR data
 
-dataSetNr = 1; % Change this to load new data 
+dataSetNr = 3; % Change this to load new data 
 
 % X - Data samples
 % D - Desired output from classifier for each sample
@@ -16,7 +16,7 @@ dataSetNr = 1; % Change this to load new data
 
 %% Select a subset of the training features
 
-numBins = 5;                    % Number of Bins you want to devide your data into
+numBins = 2;                    % Number of Bins you want to devide your data into
 numSamplesPerLabelPerBin = inf; % Number of samples per label per bin, set to inf for max number (total number is numLabels*numSamplesPerBin)
 selectAtRandom = true;          % true = select features at random, false = select the first features
 
@@ -59,10 +59,10 @@ XTest = [XTest,ones(size(XTest,1),1)];
 %  in order to train the network
 
 numHidden     = 20;     % Change this, number of hidden neurons 
-numIterations = 800;   % Change this, number of iterations (epochs)
+numIterations = 10000;   % Change this, number of iterations (epochs)
 learningRate  = 0.001; % Change this, your learning rate
-W0 = rand(size(XTrain,2),numHidden); % Initialize your weight matrix W
-V0 = rand(numHidden+1,size(DTrain,2)); % Initialize your weight matrix V (added +1 since we need to consider bias at 2nd layer)
+W0 = randn(size(XTrain,2),numHidden); % Initialize your weight matrix W
+V0 = randn(numHidden+1,size(DTrain,2)); % Initialize your weight matrix V (added +1 since we need to consider bias at 2nd layer)
 
 % Run training loop
 tic;

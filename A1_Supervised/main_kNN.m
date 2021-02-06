@@ -7,7 +7,7 @@
 % 3 = dot cloud 3
 % 4 = OCR data
 
-dataSetNr = 3; % Change this to load new data 
+dataSetNr = 4; % Change this to load new data 
 
 % X - Data samples
 % D - Desired output from classifier for each sample
@@ -48,8 +48,14 @@ LTest  = LBins{2};
 %  Note: you have to modify the kNN() function yourself.
 
 % Set the number of neighbors
-k = 10;
+K = 20;
 
+% Set the number of folds for CV
+nFold = 5;
+
+% Selecting best k based on the output of Corssvalidation
+[Acc, k] = crossValidation(dataSetNr,nFold,K);
+k
 % Classify training data
 LPredTrain = kNN(XTrain, k, XTrain, LTrain);
 % Classify test data
@@ -61,9 +67,10 @@ LPredTest  = kNN(XTest , k, XTrain, LTrain);
 
 % The confucionMatrix
 cM = calcConfusionMatrix(LPredTest, LTest);
-
+cM
 % The accuracy
 acc = calcAccuracy(cM);
+acc
 
 %% Plot classifications
 %  Note: You should not have to modify this code
