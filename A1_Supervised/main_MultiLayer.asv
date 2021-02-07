@@ -9,7 +9,7 @@ rng(12345);
 % 3 = dot cloud 3
 % 4 = OCR data
 
-dataSetNr = 3; % Change this to load new data 
+dataSetNr = 4; % Change this to load new data 
 
 % X - Data samples
 % D - Desired output from classifier for each sample
@@ -60,9 +60,9 @@ XTest = [XTest,ones(size(XTest,1),1)];
 %  Note: You need to modify trainMultiLayer() and runMultiLayer()
 %  in order to train the network
 
-numHidden     = 13;     % Change this, number of hidden neurons 
-numIterations = 15000;   % Change this, number of iterations (epochs)
-learningRate  = 0.05; % Change this, your learning rate
+numHidden     = 10;     % Change this, number of hidden neurons 
+numIterations = 25000;   % Change this, number of iterations (epochs)
+learningRate  = 0.005; % Change this, your learning rate
 W0 = randn(size(XTrain,2),numHidden)/100; % Initialize your weight matrix W
 V0 = randn(numHidden+1,size(DTrain,2))/100; % Initialize your weight matrix V (added +1 since we need to consider bias at 2nd layer)
 

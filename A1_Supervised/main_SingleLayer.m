@@ -1,5 +1,7 @@
 %% This script will help you test your single layer neural network code
 
+rng(12345);
+
 %% Select which data to use:
 
 % 1 = dot cloud 1
@@ -48,8 +50,8 @@ XTest = [XTest,ones(size(XTest,1),1)];
 %  Note: You need to modify trainSingleLayer() and runSingleLayer()
 %  in order to train the network
 
-numIterations = 10000;  % Change this, number of iterations (epochs)
-learningRate  = 0.0001; % Change this, your learning rate
+numIterations = 15000;  % Change this, number of iterations (epochs)
+learningRate  = 0.05  ; % Change this, your learning rate
 W0 = rand(size(XTrain,2),size(DTrain,2));% Change this, initialize your weight matrix W
 
 % Run training loop

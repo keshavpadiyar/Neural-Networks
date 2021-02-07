@@ -7,7 +7,7 @@ function[Acc, k] = crossValidation(dataSetNr,nFold,K)
 %% Output Parameters:
     % Acc: Maximum Accuracy obtained.
     % k: K value to which maximum accuracy is obtained.
-rng(12345);    
+    
 %% Reading data
 % X - Data samples
 % D - Desired output from classifier for each sample
@@ -62,25 +62,15 @@ for i = 1:K
         
     end
    
-    Acc(i) = testAcc;
-    AccTrain(i)=trainingAcc;
+    Acc(i) = trainingAcc;
+    AccTrain(i)
     
 end
 
 % Normalising the Accuracies by taking average
 Acc = Acc./nFold;
 
-AccTrain = AccTrain./nFold;
-
-% plot
-figure; hold on
-a1 = plot(1:K,Acc); M1 = "Test Accuracy";
-a2 = plot(1:K,AccTrain); M2 = "Training Accuracy";
-legend([a1,a2], [M1, M2]);
-
-Acc(1)=0;
-
-[k] = max(find(Acc == max(Acc,[],'all')));
+[~,k] = max(Acc);
 
 end
 
