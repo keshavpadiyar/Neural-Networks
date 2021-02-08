@@ -19,28 +19,41 @@ This data set has 2 features/columns which belong to 2 different classes.
 
 As displayed in the below figure there are data points belonging to 2 classes (in green and red) and it can be separable using a line or hyperplane. Hence a simple linear classifier is sufficient to discriminate the datapoints into its respective classes.
 
-![Distribution of Data set 1](Data_1.png)
+```{r D1,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
+knitr::include_graphics("Data_1.png")
+```
+
 **DataSet 2 :**
 
 This data set has 2 features/columns which belong to 2 different classes. 
 
 As displayed in the below figure there are data points belonging to 2 classes (in green and red). The orientation of data points are such that a line or hyperplane would not give a good result. Hence a non-linear classifier is needed to classify these data points.
 
-![Distribution of Data set 2](Data_2.png)
+```{r D2,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
+knitr::include_graphics("Data_2.png")
+```
+
 **DataSet 3 :**
 
 This data set has 3 features/columns which belong to 3 different classes. 
 
 As displayed in the below figure there are data points belonging to 3 classes (in green, red and blue). The orientation of data points are such that a linear classifier would not give a good result - Observing the green points and Red data points, these  points are having some non linear orientation where a single linear discrimination could not classify all the points correctly. Hence a non-linear classifier is needed to classify these data points.
 
-```{r fig1,echo=FALSE}
-knitr::include_graphics("Data_3.png")
+
+```{r D3,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
+knitr::include_graphics("Data_2.png")
 ```
+
 **Data-Set 4 :**
 
 This data set has 64 features/columns which belong to 10 different classes. 
 
 These data points are the pixel values, its hard to visualize in 2 dimensional space. However, by analyzing the data its observed that data points are having the overlaps, which cannot be separated with line or hyperplane. Hence a non linear classifier to be used for classification.
+
+
+```{r D4,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
+knitr::include_graphics("knnData4.png")
+```
 
 **2.	Explain why the down sampling of the OCR data (done as pre-processing) result in a more robust feature representation. See (http://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits)**
 
@@ -85,7 +98,7 @@ Note: Since its expected that the model would give best results at k = 1 also, t
 
 **Accuracy:** 99.5%
 
-```{r fig2,echo=FALSE}
+```{r fig2,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData1.png")
 ```
 
@@ -95,7 +108,7 @@ knitr::include_graphics("knnData1.png")
 
 **Accuracy:** 99%
 
-```{r fig3,echo=FALSE}
+```{r fig3,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData2.png")
 ```
 **Dataset 3:**
@@ -104,7 +117,7 @@ knitr::include_graphics("knnData2.png")
 
 **Accuracy:** 99.6%
 
-```{r fig4,echo=FALSE}
+```{r fig4,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData3.png")
 ```
 
@@ -114,7 +127,7 @@ knitr::include_graphics("knnData3.png")
 
 **Accuracy:** 97.50%
 
-```{r fig5,echo=FALSE}
+```{r echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData4.png")
 ```
 
@@ -177,28 +190,19 @@ Above obtained gradients are used to calculate the optimal weights using gradien
 
 Since the data is linearly separable into 2 classes, data looks simple hence we started with learning rate = 0.001. At learning rate = 0.005 we got 99.2% accuracy.
 
-```{r NNSD1,echo=FALSE}
-knitr::include_graphics("NNSD1.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNSD1.png","NNSE1.png"))
+``` 
 
-
-```{r NNSE1,echo=FALSE}
-knitr::include_graphics("NNSE1.png")
-```
 **Dataset 2:**
 
 The dataset 2 cannot be separated linearly. Also, the network what we used is having a linear activation function hence no good result is expected. 
 
 So, we started with learning rate = 0.0001 and tried for couple of different learning rates, but we got best result only at 0.0001.
 
-```{r NNSD2,echo=FALSE}
-knitr::include_graphics("NNSD2.png")
-```
-
-
-```{r NNSE2,echo=FALSE}
-knitr::include_graphics("NNSE2.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNSD2.png","NNSE2.png"))
+``` 
 
 **Dataset 3:**
 
@@ -206,27 +210,19 @@ The dataset 3 is similar to dataset 2 but with additional class, data cannot be 
 
 So, we started with learning rate = 0.0001 and tried for couple of different learning rates, but we got best result only at 0.05.
 
-```{r NNSD3,echo=FALSE}
-knitr::include_graphics("NNSD3.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNSD3.png","NNSE3.png"))
+``` 
 
-
-```{r NNSE3,echo=FALSE}
-knitr::include_graphics("NNSE3.png")
-```
 **Dataset 4:**
 
 The dataset 4 is a high dimensional and multiclass data, data spread is complex which cannot be separated linearly. Also, the network what we used is having a linear activation function hence no good result is expected. 
 
 So, we started with learning rate = 0.0001 and tried for couple of different learning rates, but we got best result only at 0.0003.
 
-```{r NNSD4,echo=FALSE}
-knitr::include_graphics("NNSD4.png")
-```
-
-```{r NNSE4,echo=FALSE}
-knitr::include_graphics("NNSE4.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNSD4.png","NNSE4.png"))
+``` 
 
 **Multilayer Network**
 
@@ -244,14 +240,9 @@ knitr::include_graphics("NNSE4.png")
 
 Since the data is linearly separable into 2 classes, data looks simple hence we started with learning rate = 0.001 and 5 hidden neurons at first layer. And we got the best result at learning rate = 0.05 with same number of hidden units.
 
-```{r NNMD1,echo=FALSE}
-knitr::include_graphics("NNMD1.png")
-```
-
-
-```{r NNME1,echo=FALSE}
-knitr::include_graphics("NNME1.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNMD1.png","NNME1.png"))
+``` 
 
 **Dataset 2:**
 
@@ -259,14 +250,9 @@ The dataset 2 is spread non-linearly across 2 classes.
 
 Intuitively we started with learning rate = 0.001 and 5 hidden neurons at first layer. And we got the 100% accuracy at learning rate = 0.05 with same number of hidden units.
 
-```{r NNMD2,echo=FALSE}
-knitr::include_graphics("NNMD2.png")
-```
-
-
-```{r NNME2,echo=FALSE}
-knitr::include_graphics("NNME2.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNMD2.png","NNME2.png"))
+``` 
 
 **Dataset 3:** 
 
@@ -274,15 +260,9 @@ The dataset 3 is spread non-linearly similar as in case of dataset 2 with an add
 
 Since the spread is similar to dataset 2 but intuitively we estimated that this data might need more hidden neurons, so we started with learning rate = 0.001 and 10 hidden neurons at first layer. And we got the best result at learning rate = 0.05 with number of hidden units = 13.
 
-```{r NNMD3,echo=FALSE}
-knitr::include_graphics("NNMD3.png")
-```
-
-
-```{r NNME3,echo=FALSE}
-knitr::include_graphics("NNME3.png")
-```
-From the above error curves it could be depicted that the model is slightly overfitted. However, the model has given estimated accuracy over test data.
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNMD3.png","NNME3.png"))
+``` 
 
 **Dataset 4:** 
 
@@ -290,15 +270,9 @@ The dataset 3 is spread non-linearly similar as in case of dataset 2 with an add
 
 Since the data is high dimentional and has multiple classes intuitively we estimated that this data might need more hidden neurons, so we started with learning rate = 0.001 and 20 hidden neurons at first layer. And we got the best result at learning rate = 0.005 with number of hidden units = 50.
 
-```{r NNMD4,echo=FALSE}
-knitr::include_graphics("NNMD4.png")
-```
-
-```{r NNME4,echo=FALSE}
-knitr::include_graphics("NNME4.png")
-```
-
-Above error curve depicts that, for the set of tuned parameters for dataset 4, model overfits as number of iterations increases. But however its noticeable that, error curve of test data is getting flat and not increasing and meeting the expected accuracy level.
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NNMD4.png","NNME4.png"))
+``` 
 
 **8.	Present the results, including images, of your example of a non-generalizable backprop solution. Explain why this example is non-generalizable.**
 
@@ -309,13 +283,10 @@ To achieve the non-generalizable solution, we divided the dataset 3 into 100 bin
 |---------|---------------|----------------------|--------------------------|---------------|
 | 3       | 0.05          | 15000                | 10                       | 0.90516       |
 
-```{r fig6,echo=FALSE}
-knitr::include_graphics("NN_8_Test.png")
-```
+```{r, echo=FALSE,out.width="49%", out.height="49%",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("NN_8_Test.png","NN_8_Error.png"))
+``` 
 
-```{r fig7,echo=FALSE}
-knitr::include_graphics("NN_8_Error.png")
-```
 From the above figure, its  clearly evident that, by training the model with very few datapoints leads to high variance hence the model gets overfit.
 
 **9.	Give a final discussion and conclusion where you explain the differences between the performances of the different classifiers. Pros and cons etc. **
