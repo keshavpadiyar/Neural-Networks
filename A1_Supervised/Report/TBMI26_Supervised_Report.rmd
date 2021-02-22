@@ -41,7 +41,7 @@ As displayed in the below figure there are data points belonging to 3 classes (i
 
 
 ```{r D3,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
-knitr::include_graphics("Data_2.png")
+knitr::include_graphics("Data_3.png")
 ```
 
 **Data-Set 4 :**
@@ -337,6 +337,6 @@ Neural Network
 
 **10.	Do you think there is something that can improve the results? Pre-processing, algorithm-wise etc.**
 
-Data points in the OCR data are having pixel values ranging from 0 to 16, if normalize the data to range between -1 to 1. As its ideal/recommended to have data points in same scale while calculating Euclidean distance.
+Data points in the OCR data are having pixel values ranging from 0 to 16. As its ideal/recommended to have data points in same scale while calculating Euclidean distance.
 
-Also, for the neural network with non-linear activation function - *tanh(x)* the network was not converging if the data points after multiplying with the weights get too large. We observed this in the case of OCR data. Hence we decided to give very small initial weights, ranging within -1 to 1 e^-3. Alternative could be normalizing the OCR data.
+Also, for the neural network with non-linear activation function - *tanh(x)* the network was not converging if the data points after multiplying with the weights get too large. We observed this in the case of OCR data. Hence we decided to give very small initial weights ( dividing the weights by 100). Alternative could be normalizing the OCR data. Also, we figured out that the problem we faced with tanh activation function was the gradient disappearing problem hence we could use ReLu activation function instead of tanh.
