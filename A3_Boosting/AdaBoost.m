@@ -1,12 +1,12 @@
 %% Hyper-parameters
 
 % Number of randomized Haar-features
-nbrHaarFeatures = 25;
+nbrHaarFeatures = 256;
 % Number of training images, will be evenly split between faces and
 % non-faces. (Should be even.)
-nbrTrainImages = 500;
+nbrTrainImages = 750;
 % Number of weak classifiers
-nbrWeakClassifiers = 30;
+nbrWeakClassifiers = 50;
 
 %% Load face and non-face data and plot a few examples
 load faces;
@@ -60,7 +60,7 @@ nbrTestImages = length(yTest);
 
 %% Implement the AdaBoost training here
 %  Use your implementation of WeakClassifier and WeakClassifierError
-T = 200; %Number of Weak Classifiers
+T = nbrWeakClassifiers; %Number of Weak Classifiers
 D = ones(1,size(xTrain,2))/size(xTrain,2); % initializing initial weights
 
 % Variables to store the optimal outputs of each weak classifier
@@ -75,7 +75,7 @@ for c = 1:T
     emin = inf; % Epsilon Loss Term
 
     for k = 1:size(xTrain,1) %looping over all the features (the input matrix is of the form (feature,observations)
-        threshold = xTrain(k,:)+0.02; % initializing thresholds (All the observations in a feature will act as threshold)
+        threshold = xTrain(k,:)+0.05; % initializing thresholds (All the observations in a feature will act as threshold)
         % Added 0.05 offset, to avoid overfitting.
 
         for t = threshold %looping over all the thresholds and identify the best threshold
@@ -105,7 +105,7 @@ for c = 1:T
     end
     
     D = D .* exp(-alpha * yTrain .* optimalClassification); % Updating weights    
-    D(D>0.5) = 0.5; % trimming weights to decrease the effects of outliers    
+    D(D>=0.9) = 0.8; % trimming weights to decrease the effects of outliers    
     D = D ./ sum(D); % Normalizing weights
     
     % Updating Variables to store the optimal outputs of each weak classifier
