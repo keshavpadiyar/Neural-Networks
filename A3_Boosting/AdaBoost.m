@@ -119,25 +119,64 @@ end
 %  accuracy can be used as a performance metric since the training accuracy
 %  is biased.
 
-h = zeros(length(h_threshold),size(xTest,2));
-for i = 1:size(h,1)
-    h(i,:)= h_alpha(i) * WeakClassifier(h_threshold(i),h_polarity(i),xTest(h_feature(i),:)); 
+htrain = zeros(length(h_threshold),size(xTrain,2));
+trainAccuracy = zeros(1,length(h_threshold));
+for i = 1:size(htrain,1)
+    htrain(i,:)= h_alpha(i) * WeakClassifier(h_threshold(i),h_polarity(i),xTrain(h_feature(i),:)); 
+    h_classification = sign(sum(htrain,1));
+    trainAccuracy(i) = sum(h_classification==yTrain)/size(yTrain,2);
 end
 
-h_classification = sign(sum(h,1));
-Accuracy = sum(h_classification==yTest)/size(yTest,2)
+htest = zeros(length(h_threshold),size(xTest,2));
+testAccuracy = zeros(1,length(h_threshold));
+for i = 1:size(htest,1)
+    htest(i,:)= h_alpha(i) * WeakClassifier(h_threshold(i),h_polarity(i),xTest(h_feature(i),:)); 
+    h_classification = sign(sum(htest,1));
+    testAccuracy(i) = sum(h_classification==yTest)/size(yTest,2);
+end
+
 %% Plot the error of the strong classifier as a function of the number of weak classifiers.
 %  Note: you can find this error without re-training with a different
 %  number of weak classifiers.
-
-
-
+figure(4)
+plot(1:nbrWeakClassifiers,trainAccuracy)
+hold on
+plot(1:nbrWeakClassifiers,testAccuracy)
+hold off
+legend("Training Accuracy", "Test Accuracy")
+title('Training and Test Accuracy vs Number of weak Classifiers')
+xlabel('Number of Weak Classifiers')
+ylabel('Accuracy')
 %% Plot some of the misclassified faces and non-faces
 %  Use the subplot command to make nice figures with multiple images.
+figure(5);
+colormap gray;
+x=find((h_classification ~= yTest)~=0,25);
+for y = 1:25
+         subplot(5,5,y), imagesc(testImages(:,:,x(y)));
+         axis image;
+         axis off;
+end
 
+figure(6);
+colormap gray;
+x=find((h_classification ~= yTest)~=0);
+x = x(end-25:end);
+for y = 1:25
+         subplot(5,5,y), imagesc(testImages(:,:,x(y)));
+         axis image;
+         axis off;
+end
 
 
 %% Plot your choosen Haar-features
 %  Use the subplot command to make nice figures with multiple images.
-
-
+figure(7);
+colormap gray;
+k = 1;
+while k<26        
+    subplot(5,5,k), imagesc(haarFeatureMasks(:,:,h_feature(k)));
+    axis image;
+    axis off;    
+    k = k + 1;  
+end
