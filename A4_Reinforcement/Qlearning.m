@@ -1,13 +1,13 @@
 %% Initialization
 %  Initialize the world, Q-table, and hyperparameters
-world = 2;
+world = 4;
 gwinit(world); % initialise the world environmnet
 
 wState = gwstate(); % get the initial state
 
 actions = [1 2 3 4]; % 1=down, 2=up, 3=right and 4=left
 
-Q = zeros(wState.xsize,wState.ysize, length(actions));% initializing the Q table
+Q = zeros(wState.ysize,wState.xsize, length(actions));% initializing the Q table
 
 % Forcing Q values at the borders to -inf so that bot wont get stuck there
 Q(1, :, 2) = -Inf; % top 
@@ -15,7 +15,7 @@ Q(:, end, 3) = -Inf; % right
 Q(end, :, 1) = -Inf; % bottom 
 Q(:, 1, 4) = -Inf; % left
 
-eta = 0.1; % learning rate
+eta = 0.5; % learning rate
 
 gamma = 0.9; % discount factor
 
@@ -40,15 +40,15 @@ for episode = 1:maxEpisodes
     
     % execute every epesode till it reaches some terminal position
     while ~wState.isterminal
-        [currentAction, optimalAction] = chooseaction(Q, wState.pos(2), wState.pos(1), actions, actionProb, getepsilon(episode,maxEpisodes));
+        [currentAction, optimalAction] = chooseaction(Q, wState.pos(1), wState.pos(2), actions, actionProb, getepsilon(episode,maxEpisodes));
         nextWState = gwaction(currentAction);
             if nextWState.isvalid
                 reward = nextWState.feedback;
-                Q(wState.pos(2),wState.pos(1),currentAction) = (1-eta) * Q(wState.pos(2),wState.pos(1),currentAction)+ eta * (reward+ gamma * max(Q(nextWState.pos(2),nextWState.pos(1),:)));
+                Q(wState.pos(1),wState.pos(2),currentAction) = (1-eta) * Q(wState.pos(1),wState.pos(2),currentAction)...
+                    + eta * (reward+ gamma * max(Q(nextWState.pos(1),nextWState.pos(2),:)));
                 wState = nextWState;
             else
                 break;
-                
                 
             end
     end 
@@ -57,8 +57,8 @@ end
 
 figure(1);
 gwdraw(); 
-for x = 1:wState.xsize
-   for y = 1:wState.ysize
+for x = 1:wState.ysize
+   for y = 1:wState.xsize
       [~,I] = max(Q(x,y,:));
       gwplotarrow([x,y],I);
    end
@@ -68,4 +68,3 @@ end
 %  to traverse the gridworld. Do not update the Q-table when testing.
 %  Also, you should not explore when testing, i.e. epsilon=0; always pick
 %  the optimal action.
-
