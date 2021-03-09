@@ -1,12 +1,12 @@
 %% Hyper-parameters
 
 % Number of randomized Haar-features
-nbrHaarFeatures = 256;
+nbrHaarFeatures = 200;
 % Number of training images, will be evenly split between faces and
 % non-faces. (Should be even.)
-nbrTrainImages = 750;
+nbrTrainImages = 2000;
 % Number of weak classifiers
-nbrWeakClassifiers = 50;
+nbrWeakClassifiers = 25;
 
 %% Load face and non-face data and plot a few examples
 load faces;

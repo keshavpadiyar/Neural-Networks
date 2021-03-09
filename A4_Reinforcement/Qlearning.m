@@ -21,7 +21,8 @@ gamma = 0.9; % discount factor
 
 actionProb = ones(1,length(actions))/length(actions); %probabilities for each action
 
-maxEpisodes = 10000;
+maxEpisodes = 5000;
+cnt = 0;
 
 %% Training loop
 %  Train the agent using the Q-learning algorithm.
@@ -31,6 +32,16 @@ for episode = 1:maxEpisodes
     % Prining values for debugging
     if ~rem(episode,500)
         disp(episode);
+        disp(cnt);
+        [~,a]= max(Q,[],3);
+        figure(cnt);
+        gwdraw(); 
+        for x = 1:wState.ysize
+           for y = 1:wState.xsize
+              gwplotarrow([x,y],a(x,y));
+           end
+        end
+
     end
     
     % beginnig Q-Learning
@@ -48,21 +59,35 @@ for episode = 1:maxEpisodes
                     + eta * (reward+ gamma * max(Q(nextWState.pos(1),nextWState.pos(2),:)));
                 wState = nextWState;
             else
+                %disp(wState)
+                reward  = nextWState.feedback;
+                Q(wState.pos(1),wState.pos(2),currentAction) = (1-eta) * Q(wState.pos(1),wState.pos(2),currentAction)...
+                    + eta * (reward+ gamma * max(Q(nextWState.pos(1),nextWState.pos(2),:)));
                 break;
+                %wState = nextWState;
                 
             end
     end 
     
+    if wState.isterminal
+         cnt = cnt+1;
+    end
+    
 end
 
+[~,a]= max(Q,[],3);
 figure(1);
 gwdraw(); 
 for x = 1:wState.ysize
    for y = 1:wState.xsize
-      [~,I] = max(Q(x,y,:));
-      gwplotarrow([x,y],I);
+      gwplotarrow([x,y],a(x,y));
    end
 end
+
+
+
+
+
 %% Test loop
 %  Test the agent (subjectively) by letting it use the optimal policy
 %  to traverse the gridworld. Do not update the Q-table when testing.
