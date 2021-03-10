@@ -1,6 +1,6 @@
 %% Initialization
 %  Initialize the world, Q-table, and hyperparameters
-world = 3;
+world = 12;
 gwinit(world); % initialise the world environmnet
 
 wState = gwstate(); % get the initial state
