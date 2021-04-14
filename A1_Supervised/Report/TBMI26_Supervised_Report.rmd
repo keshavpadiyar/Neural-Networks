@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This data set has 2 features/columns which belong to 2 different classes. 
 
-As displayed in the below figure there are data points belonging to 2 classes (in green and red) and it can be separable using a line or hyperplane. Hence a simple linear classifier is sufficient to discriminate the datapoints into its respective classes.
+As displayed in the below figure there are data points belonging to 2 classes (in green and red) and are overlapping on each other at some points, therefore it cannot be separable using a line or hyperplane and also not by  a non-linear classifier. 
 
 ```{r D1,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("Data_1.png")
@@ -67,7 +67,7 @@ Implementation of K-NNN algorithm consisted of following steps:
 1. Loading the data
 2. Initializing the K to a chosen number of neighbors.
 3. Calculating the Euclidean Distance between the known data point and a new observation.
-$\sum_{feature-1}^{feature-n}\sqrt{(Xnew_{i}-Xknown_{i})^2}$
+$\sqrt{\sum_{feature-1}^{feature-n}{(Xnew_{i}-Xknown_{i})^2}}$
 4. Order the distances in ascending order. 
 5. Based on the number of neighbors chosen, select the nearest distances.
 6. Map the indices of distances obtained in the step 5 with the indices of true label.
@@ -94,9 +94,9 @@ Note: Since its expected that the model would give best results at k = 1 also, t
 
 **Dataset 1:**
 
-**optimal k:** 12
+**optimal k:** 20
 
-**Accuracy:** 99.5%
+**Accuracy:** 99%
 
 ```{r fig2,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData1.png")
@@ -106,26 +106,26 @@ knitr::include_graphics("knnData1.png")
 
 **optimal k:** 2
 
-**Accuracy:** 99%
+**Accuracy:** 100%
 
 ```{r fig3,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData2.png")
 ```
 **Dataset 3:**
 
-**optimal k:** 3
+**optimal k:**11
 
-**Accuracy:** 99.6%
+**Accuracy:** 99.00%
 
 ```{r fig4,echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
-knitr::include_graphics("knnData3.png")
+knitr::include_graphics("knnData3_1.png")
 ```
 
 **Dataset 4:**
 
 **optimal k:** 3
 
-**Accuracy:** 97.50%
+**Accuracy:** 97.33%
 
 ```{r echo=FALSE,out.width="49%", out.height="49%",fig.align='center'}
 knitr::include_graphics("knnData4.png")
@@ -179,7 +179,7 @@ Above obtained gradients are used to calculate the optimal weights using gradien
 
                              Performance BenchMarking of Single Layer Neural Network
                                     
-| DataSet | Learning Rate | Number Of Iterations | Number of Hidden Neurons | Test Accuracy | Total Execution Time |
+| DataSet | Learning Rate | Number Of Iterations | Number Classes/Output Neurons | Test Accuracy | Total Execution Time |
 |---------|---------------|----------------------|--------------------------|---------------|----------------------|
 | 1       | 0.005         | 15000                | 2                        | 0.992         | 0.75385 sec          |
 | 2       | 0.0001        | 15000                | 2                        | 0.831         | 0.83238 sec          |

@@ -80,6 +80,7 @@ legend([a1,a2], [M1, M2]);
 
 Acc(1)=0;
 
+disp(Acc);
 [k] = max(find(Acc == max(Acc,[],'all')));
 
 end

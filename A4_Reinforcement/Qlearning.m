@@ -1,6 +1,6 @@
 %% Initialization
 %  Initialize the world, Q-table, and hyperparameters
-world = 12;
+world =4;
 gwinit(world); % initialise the world environmnet
 
 wState = gwstate(); % get the initial state
@@ -15,13 +15,13 @@ Q(:, end, 3) = -Inf; % right
 Q(end, :, 1) = -Inf; % bottom 
 Q(:, 1, 4) = -Inf; % left
 
-eta = 0.75; % learning rate
+eta = 0.01; % learning rate
 
 gamma = 0.9; % discount factor
 
 actionProb = ones(1,length(actions))/length(actions); %probabilities for each action
 
-maxEpisodes = 5000;
+maxEpisodes = 10000;
 cnt = 0;
 
 %% Training loop
@@ -48,7 +48,7 @@ for episode = 1:maxEpisodes
     
     % execute every epesode till it reaches some terminal position
     while ~wState.isterminal
-        [currentAction, optimalAction] = chooseaction(Q, wState.pos(1), wState.pos(2), actions, actionProb, getepsilon(episode,maxEpisodes));
+        [currentAction, optimalAction] = chooseaction(Q, wState.pos(1), wState.pos(2), actions, actionProb,getepsilon(episode,maxEpisodes));%getepsilon(episode,maxEpisodes)
         nextWState = gwaction(currentAction);
             if nextWState.isvalid
                 reward = nextWState.feedback;
@@ -60,13 +60,16 @@ for episode = 1:maxEpisodes
                 reward  = nextWState.feedback;
                 Q(wState.pos(1),wState.pos(2),currentAction) = (1-eta) * Q(wState.pos(1),wState.pos(2),currentAction)...
                     + eta * (reward+ gamma * max(Q(nextWState.pos(1),nextWState.pos(2),:)));
-                break;                
+                %break % Removed the break statement
+                %wState = nextWState;
             end
     end 
     
     if wState.isterminal
          cnt = cnt+1;
     end
+    
+    %disp(cnt)
     
 end
 
@@ -75,13 +78,19 @@ end
 %  to traverse the gridworld. Do not update the Q-table when testing.
 %  Also, you should not explore when testing, i.e. epsilon=0; always pick
 %  the optimal action.
-
+disp(cnt);
+figure(cnt+3);
+imagesc(max(Q, [], 3));
+colorbar;
+figure(cnt+1);
+gwdraw("Policy", getpolicy(Q));
 cnt = 0;
-for episode = 1:maxEpisodes
-    
+for episode = 1:2
+    disp("Here")
     % Prining values for debugging
     if ~rem(episode,300)
         disp(episode);
+        disp("Here")
         %disp(cnt);
     end    
     % beginnig Q-Learning
@@ -91,12 +100,13 @@ for episode = 1:maxEpisodes
     
     % execute every epesode till it reaches some terminal position
     while ~wState.isterminal
+        gwdraw("Policy", getpolicy(Q))
         [currentAction, optimalAction] = chooseaction(Q, wState.pos(1), wState.pos(2), actions, actionProb, 0);
         nextWState = gwaction(currentAction);
             if nextWState.isvalid               
                 wState = nextWState;
-            else
-                break;               
+            %else
+                %break;  % Removed the break statement             
             end
     end 
     

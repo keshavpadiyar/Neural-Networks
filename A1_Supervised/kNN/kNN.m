@@ -24,7 +24,7 @@ function [ LPred ] = kNN(X, k, XTrain, LTrain)
 % particular row
     for x_index = 1:x_nrow
          for d_index = 1:d_nrow
-            dist(d_index) = sum(sqrt((data(d_index,:)-x(x_index,:)).^2)); % Eucledian Distance
+            dist(d_index) = sqrt(sum((data(d_index,:)-x(x_index,:)).^2)); % Eucledian Distance
             final_class(d_index)=y(d_index);
          end
         [d,i] = sort(dist); % sort the distances in ascending order
